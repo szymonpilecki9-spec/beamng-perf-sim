@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeamNG Performance Sim</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #ff6600; }
+        .card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BeamNG Performance Sim</h1>
+    <p>Application is running successfully!</p>
+    <div class="card">
+        <p>Server Status: <span id="status">Checking...</span></p>
+    </div>
+
+    <script>
+        // Test the Python API
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('status').innerText = data.message;
+                document.getElementById('status').style.color = 'lightgreen';
+            })
+            .catch(err => {
+                document.getElementById('status').innerText = 'Error connecting to server';
+                document.getElementById('status').style.color = 'red';
+            });
+    </script>
+</body>
+</html>
