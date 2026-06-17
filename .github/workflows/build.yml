@@ -28,6 +28,10 @@ jobs:
         cmake -S . -B build
         cmake --build build --config Release
 
+    - name: Find and Move C++ Core
+      run: |
+        Get-ChildItem -Path build -Filter "beamng_perf_core.pyd" -Recurse | Copy-Item -Destination src\backend\beamng_perf_core.pyd -Force
+
     - name: Build EXE with PyInstaller
       run: |
         pyinstaller --noconfirm --onefile --console --name "BeamNGPerfSim" `
