@@ -11,3 +11,9 @@ find_package(pybind11 CONFIG REQUIRED)
 
 pybind11_add_module(beamng_perf_core src/core/engine_sim.cpp)
 set_target_properties(beamng_perf_core PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+
+# Force CMake to put the compiled .pyd file directly into src/backend/
+set_target_properties(beamng_perf_core PROPERTIES 
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/backend"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/backend"
+)
