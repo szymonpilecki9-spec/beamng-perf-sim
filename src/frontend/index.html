@@ -27,6 +27,7 @@
     <p>Application is running successfully!</p>
     <div class="card">
         <p>Server Status: <span id="status">Checking...</span></p>
+        <p>C++ Math Test: <span id="cpp_torque">Calculating...</span></p>
     </div>
 
     <script>
@@ -40,6 +41,18 @@
             .catch(err => {
                 document.getElementById('status').innerText = 'Error connecting to server';
                 document.getElementById('status').style.color = 'red';
+            });
+
+        // Test the C++ Math API
+        fetch('/api/test_cpp')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cpp_torque').innerText = data.torque + " Nm @ " + data.rpm + " RPM";
+                document.getElementById('cpp_torque').style.color = 'lightgreen';
+            })
+            .catch(err => {
+                document.getElementById('cpp_torque').innerText = 'Error';
+                document.getElementById('cpp_torque').style.color = 'red';
             });
     </script>
 </body>
